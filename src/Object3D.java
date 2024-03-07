@@ -41,12 +41,30 @@ public class Object3D {
             ));
             //System.out.println(pointList.get(i));
         }
-//        surfaces.add (new Surface(new int[] {0, 1, 3, 2})); // Frontside
+        surfaces.add (new Surface(new int[] {0, 1, 3, 2})); // Frontside
         surfaces.add (new Surface(new int[] {0, 4, 5, 1})); // Top
-//        surfaces.add (new Surface(new int[] {1, 5, 7, 3})); // right
-//        surfaces.add (new Surface(new int[] {5, 4, 6, 7})); // Backside
+        surfaces.add (new Surface(new int[] {1, 5, 7, 3})); // right
+        surfaces.add (new Surface(new int[] {5, 4, 6, 7})); // Backside
         surfaces.add (new Surface(new int[] {2, 3, 7, 6})); // Bottom
-//        surfaces.add (new Surface(new int[] {0, 2, 6, 4})); // left
+        surfaces.add (new Surface(new int[] {0, 2, 6, 4})); // left
+    }
+
+    public boolean inView (Camera camera) {
+        Point3D camCorditates = new Point3D(this.pos);
+        camCorditates.subtract(camera.pos);
+        Point3D camRotated = camCorditates.getRotated(camera.rot);
+
+        if (camRotated.z < 0)
+            return false;
+        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenWidth / 2 )
+            return false;
+        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenHeight / 2)
+            return false;
+        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenWidth / 2)
+            return false;
+        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenHeight / 2)
+            return false;
+        return false;
     }
 
     public void move () {

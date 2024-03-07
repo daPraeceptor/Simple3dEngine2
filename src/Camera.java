@@ -1,7 +1,20 @@
 public class Camera extends Object3D {
-    public static double d = 400;
-    Camera (Point3D p, double d) {
+    public double screenDistance = 400;
+    public int screenWidth = 0; // in pixels
+    public int screenHeight = 0;
+    Camera (Point3D p, double screenDistance, int screenWidth, int screenHeight) {
         super (p);
-        this.d = d;
+        this.screenDistance = screenDistance;
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
+    }
+    @Override
+    public void move () {
+        if (dir.x < - Math.PI /4)
+            dir.x = - Math.PI /4;
+        else if (dir.x > Math.PI /4)
+            dir.x = Math.PI /4;
+        super.move ();
+
     }
 }

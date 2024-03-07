@@ -30,7 +30,7 @@ public class Point3D {
 
     @Override
     public String toString() {
-        return "" + x + ", " + y + ", " + z; //super.toString();
+        return x + ", " + y + ", " + z; //super.toString();
     }
 
     @Override
@@ -95,7 +95,11 @@ public class Point3D {
         Point3D d = new Point3D(p.x - this.x, p.y - this.y, p.z - this.z );
         return Math.sqrt(d.x * d.x + d.y * d.y + d.z * d.z );
     }
-
+    public Point3D getRotated (Point3D rotation) {
+        if (rotation == null)
+            return null;
+        return this.getRotated (rotation.x, rotation.y, rotation.z);
+    }
     public Point3D getRotated (double x, double y, double z) {
         // rotate round x-axis
         Point3D rP = new Point3D(this.x,
