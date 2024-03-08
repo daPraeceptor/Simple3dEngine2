@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1238680-1483-4e87-b32c-7ea825974619" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ProjectedPolygon.java" afterDir="false" />
+    <list default="true" id="b1238680-1483-4e87-b32c-7ea825974619" name="Changes" comment="Rearange">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Camera.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object3D.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Point3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Point3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProjectedPolygon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ProjectedPolygon.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,20 +79,39 @@
       <workItem from="1709039929264" duration="56000" />
       <workItem from="1709626975580" duration="23129000" />
       <workItem from="1709718548042" duration="5493000" />
-      <workItem from="1709809856067" duration="7783000" />
+      <workItem from="1709809856067" duration="7860000" />
+      <workItem from="1709886217740" duration="1106000" />
+      <workItem from="1709899788368" duration="9080000" />
     </task>
+    <task id="LOCAL−00001" summary="Rearange">
+      <option name="closed" value="true" />
+      <created>1709826170642</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1709826170642</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Rearange" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rearange" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="3" />
+          <line>269</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

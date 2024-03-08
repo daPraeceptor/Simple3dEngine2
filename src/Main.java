@@ -1,16 +1,20 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import javax.swing.*;
 
 public class Main {
 
-    private static boolean drawObjectPoints = true;
+    private static boolean drawObjectPoints = false;
     private static boolean drawObjectSurfaces = true;
 
     public static ArrayList<Object3D> objects = new ArrayList<>();
-    public static ArrayList<ProjectedPolygon> polygons = new ArrayList<>();
+    public static ArrayList<ProjectedPolygon> polygons = new ArrayList<ProjectedPolygon>() ;
     public static Camera camera = null;
+
+    public static Object3D light = new Object3D(new Point3D(-600, -1200, - 400));
     public static Point3D dir = new Point3D();
 
     private static double rotation_speed = Math.PI / 64;
@@ -19,7 +23,7 @@ public class Main {
 
         // Create objects
         for (int i = 0; i < 20; i++) {
-            objects.add(new Object3D(new Point3D(20 * (i / 4), 0, 0 + 20 * (i % 4))));
+            objects.add(new Object3D(new Point3D(20 * (i / 4), 0, 10 + 20 * (i % 4))));
             objects.get(i).makeThisRectangle(new Point3D(1, 1, 1));
             if (i == 0) {
                 objects.get(i).color = new Color(40, 40, 240);
@@ -29,9 +33,12 @@ public class Main {
                 objects.get(i).rotadd = new Point3D(0.1 * (i % 3), 0.1 * ((i + 1) % 3), 0.1 * ((i + 2) % 3));
             }
         }
+
+
         JFrame f = new JFrame("Simple 3D Engine Demo") {
             public void paint(Graphics g) {
                 super.paint(g);
+                ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
                 g.setColor(new Color(60, 220, 80));
                 g.fillRect(0, (int) (-(getHeight() / 2) * camera.rot.x /*+ Math.PI / 2*/) + getHeight() / 2, getWidth(), getHeight());
 
@@ -183,7 +190,7 @@ public class Main {
             }
         });
 
-        Timer timer = new Timer(50, new ActionListener() {
+        Timer timer = new Timer(20, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Apply movement
@@ -216,37 +223,51 @@ public class Main {
                             p1.subtract(p0);
                             p2.subtract(p0);
 
-                            Point3D crossProduct = p2.crossProduct(p1);
+                            Point3D crossProduct = p1.crossProduct(p2);
                             //System.out.println ("Cross: " + crossProduct + " p0:" + p0);
 
-                            // Calculate angle to viewer
-                            Point3D camPos = new Point3D(camera.pos);
+                            // Calculate angle to viewe
+                            Point3D camPos = new Point3D();
                             camPos.subtract(p0);
                             double dotProduct = crossProduct.dotProduct(camPos);
                             double angle = Math.asin(dotProduct / (camPos.length() * crossProduct.length()));
                             //System.out.println(" |camPos| = " + camPos.length() + " |cross| = " + crossProduct.length());
+                            //System.out.println("Angle = " + angle + " |cross| = " + crossProduct.length());
 
-                            double lumination = ((angle + Math.PI / 2)) / (Math.PI);
+                            // Light angle
+                            double dotProdLight = crossProduct.dotProduct(light.pos);
+                            double light_angle = Math.asin(dotProdLight / (light.pos.length() * crossProduct.length()));
+                            double lumination = light_angle / (Math.PI ) + 0.5;
+
                             //System.out.println ("Lumination: " + lumination + " Angle:" + angle);
-                            if (angle < 0) {
-                                ProjectedPolygon polygon = new ProjectedPolygon(new Color ((int) (o.color.getRed() * lumination), (int) (o.color.getGreen() * lumination), (int) (o.color.getBlue() * lumination )));
+                            if (angle > 0) {
+                                ProjectedPolygon polygon = new ProjectedPolygon(new Color (
+                                        (int) (o.color.getRed() * lumination),
+                                        (int) (o.color.getGreen() * lumination),
+                                        (int) (o.color.getBlue() * lumination )));
+                                double avrage_z = 0.;
                                 for (int i = 0; i < s.nrOfPoints(); i++) {
                                     Point3D p = o.rotatedPointList.get(s.getPointIndex(i));
-                                    if (p.z <= 0)
-                                        continue;
+                                    //if (p.z <= 0)
+                                    //    continue;
                                     int xx = (int) ((p.x * camera.screenDistance) / (p.z)) + camera.screenWidth / 2;
                                     int yy = (int) ((p.y * camera.screenDistance) / (p.z)) + camera.screenHeight / 2;
                                     polygon.addPoint(xx, yy);
+                                    avrage_z += p.z;
                                     //System.out.println ("Point " + s.getPoint(i) + ": " + p + " -> " + xx + ", " + yy);
                                 }
+                                // z sort value
+                                polygon.z = avrage_z / s.nrOfPoints();
+                                //
+                                if (polygon.z <= 0)
+                                    continue;
                                 polygons.add (polygon);
-                                //System.out.println ("Camera.d: " + camera.d);
                             }
                         } // surface
                     } // Objects
+                    // z-sort
+                    polygons.sort((ProjectedPolygon p1, ProjectedPolygon p2)-> (int) ((p2.z - p1.z)*100));
                 } // if (drawSurfaces)
-
-                // Sort surfaces
 
                 // Paint surfaces
                 f.repaint();
