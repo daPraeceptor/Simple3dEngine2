@@ -54,17 +54,18 @@ public class Object3D {
         camCorditates.subtract(camera.pos);
         Point3D camRotated = camCorditates.getRotated(camera.rot);
 
-        if (camRotated.z < 0)
+        if (camRotated.z < 1)
             return false;
-        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenWidth / 2 )
-            return false;
-        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenHeight / 2)
-            return false;
-        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenWidth / 2)
-            return false;
-        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenHeight / 2)
-            return false;
-        return false;
+//        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenWidth / 2 )
+//           return false;
+//        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenHeight / 2)
+//            return false;
+//        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenWidth / 2)
+//            return false;
+//        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenHeight / 2)
+//            return false;
+
+        return true;
     }
 
     public void move () {

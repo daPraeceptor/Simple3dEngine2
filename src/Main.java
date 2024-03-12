@@ -19,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Create objects
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 24; i++) {
             objects.add(new Object3D(new Point3D(20. * (int) (i / 4), 0, 10 + 20 * (i % 4))));
             objects.get(i).makeThisRectangle(new Point3D(1, 1, 1));
             if (i == 0) {
@@ -190,7 +190,7 @@ public class Main {
                 // Determine objects to draw
                 ArrayList<Object3D> objectsToView = new ArrayList<>();
                 for (Object3D o : objects) {
-                    if (true) /*o.inView(camera))*/ {
+                    if (o.inView(camera)) {
                         objectsToView.add(o);
                     }
                 }
