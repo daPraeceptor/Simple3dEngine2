@@ -1,29 +1,26 @@
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import javax.swing.*;
 
 public class Main {
 
-    private static boolean drawObjectPoints = false;
-    private static boolean drawObjectSurfaces = true;
+    private static final boolean drawObjectPoints = false;
+    private static final boolean drawObjectSurfaces = true;
 
     public static ArrayList<Object3D> objects = new ArrayList<>();
-    public static ArrayList<ProjectedPolygon> polygons = new ArrayList<ProjectedPolygon>() ;
+    public static ArrayList<ProjectedPolygon> polygons = new ArrayList<>() ;
     public static Camera camera = null;
 
     public static Object3D light = new Object3D(new Point3D(-600, -1200, - 400));
-    public static Point3D dir = new Point3D();
 
-    private static double rotation_speed = Math.PI / 64;
+    private static final double rotation_speed = Math.PI / 64;
 
     public static void main(String[] args) {
 
         // Create objects
         for (int i = 0; i < 20; i++) {
-            objects.add(new Object3D(new Point3D(20 * (i / 4), 0, 10 + 20 * (i % 4))));
+            objects.add(new Object3D(new Point3D(20. * (i / 4), 0, 10 + 20 * (i % 4))));
             objects.get(i).makeThisRectangle(new Point3D(1, 1, 1));
             if (i == 0) {
                 objects.get(i).color = new Color(40, 40, 240);
@@ -63,7 +60,6 @@ public class Main {
                     }
 
                     if (drawObjectPoints) {
-                        int i = 0;
                         for (Point3D p : o.rotatedPointList) {
                             int size = (int) (1 * camera.screenDistance / (p.z));
                             int xx = (int) ((p.x) * camera.screenDistance / (p.z)) - size / 2 + getWidth() / 2;
@@ -116,7 +112,7 @@ public class Main {
                 camera.rot.y -= (double) deltaX * 2. / f.getWidth();
                 camera.rot.x += (double) deltaY * 2. / f.getHeight();
 
-                Robot r = null;
+                Robot r;
                 try {
                     r = new Robot();
                     r.mouseMove(f.getWidth() / 2, f.getHeight() / 2);
@@ -190,9 +186,7 @@ public class Main {
             }
         });
 
-        Timer timer = new Timer(20, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        Timer timer = new Timer(20, (ActionEvent e) ->  {
                 // Apply movement
                 camera.move();
                 for (Object3D o : objects) {
@@ -268,10 +262,9 @@ public class Main {
                     // z-sort
                     polygons.sort((ProjectedPolygon p1, ProjectedPolygon p2)-> (int) ((p2.z - p1.z)*100));
                 } // if (drawSurfaces)
-
                 // Paint surfaces
                 f.repaint();
-            }
+
         });
         timer.start();
 
