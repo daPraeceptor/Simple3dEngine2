@@ -81,7 +81,7 @@
       <workItem from="1709809856067" duration="7860000" />
       <workItem from="1709886217740" duration="1106000" />
       <workItem from="1709899788368" duration="9413000" />
-      <workItem from="1710250180753" duration="290000" />
+      <workItem from="1710250180753" duration="517000" />
     </task>
     <task id="LOCAL−00001" summary="Rearange">
       <option name="closed" value="true" />
@@ -104,7 +104,14 @@
       <option name="presentableId" value="LOCAL−00003" />
       <updated>1710250204326</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL−00004" summary="Sides, shades and z-ordering fix">
+      <option name="closed" value="true" />
+      <created>1710250523946</created>
+      <option name="number" value="LOCAL−00004" />
+      <option name="presentableId" value="LOCAL−00004" />
+      <updated>1710250523946</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

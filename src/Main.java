@@ -20,7 +20,7 @@ public class Main {
 
         // Create objects
         for (int i = 0; i < 20; i++) {
-            objects.add(new Object3D(new Point3D(20. * (i / 4), 0, 10 + 20 * (i % 4))));
+            objects.add(new Object3D(new Point3D(20. * (int) (i / 4), 0, 10 + 20 * (i % 4))));
             objects.get(i).makeThisRectangle(new Point3D(1, 1, 1));
             if (i == 0) {
                 objects.get(i).color = new Color(40, 40, 240);
@@ -165,14 +165,8 @@ public class Main {
             public void keyReleased(KeyEvent e) {
                 switch (e.getKeyCode()) {
                     case 37:
-                        camera.dir.setTo(0, 0, 0);
-                        break;
                     case 38:
-                        camera.dir.setTo(0, 0, 0);
-                        break;
                     case 39:
-                        camera.dir.setTo(0, 0, 0);
-                        break;
                     case 40:
                         camera.dir.setTo(0, 0, 0);
                         break;
@@ -194,7 +188,7 @@ public class Main {
                 }
 
                 // Determine objects to draw
-                ArrayList<Object3D> objectsToView = new ArrayList<Object3D>();
+                ArrayList<Object3D> objectsToView = new ArrayList<>();
                 for (Object3D o : objects) {
                     if (true) /*o.inView(camera))*/ {
                         objectsToView.add(o);
