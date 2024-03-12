@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b1238680-1483-4e87-b32c-7ea825974619" name="Changes" comment="Sides, shades and z-ordering fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Camera.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Camera.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,7 @@
       <workItem from="1709809856067" duration="7860000" />
       <workItem from="1709886217740" duration="1106000" />
       <workItem from="1709899788368" duration="9413000" />
-      <workItem from="1710250180753" duration="517000" />
+      <workItem from="1710250180753" duration="667000" />
     </task>
     <task id="LOCAL−00001" summary="Rearange">
       <option name="closed" value="true" />
@@ -111,7 +111,14 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1710250523946</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL−00005" summary="Sides, shades and z-ordering fix">
+      <option name="closed" value="true" />
+      <created>1710250756600</created>
+      <option name="number" value="LOCAL−00005" />
+      <option name="presentableId" value="LOCAL−00005" />
+      <updated>1710250756600</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
