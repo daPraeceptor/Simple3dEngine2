@@ -54,10 +54,8 @@ public class Point3D {
         this.y += p.y;
         this.z += p.z;
     }
-    public void subtract (Point3D p) {
-        this.x -= p.x;
-        this.y -= p.y;
-        this.z -= p.z;
+    public Point3D subtract (Point3D p) {
+        return new Point3D (this.x - p.x, this.y - p.y, this.z - p.z);
     }
 
     public void add (double x, double y, double z) {
@@ -65,16 +63,13 @@ public class Point3D {
         this.y += y;
         this.z += z;
     }
-    public void subtract (double x, double y, double z) {
-        this.x -= x;
-        this.y -= y;
-        this.z -= z;
+    public Point3D subtract (double x, double y, double z) {
+        return new Point3D (this.x - x, this.y - y, this.z - z);
     }
 
-    public void scale (double factor) {
-        this.x *= factor;
-        this.y *= factor;
-        this.z *= factor;
+    public Point3D getScaled (double factor) {
+        return new Point3D (this.x * factor, this.y * factor, this.z * factor);
+
     }
 
     public Point3D crossProduct (Point3D p) {
@@ -103,8 +98,8 @@ public class Point3D {
     public Point3D getRotated (double x, double y, double z) {
         // rotate round x-axis
         Point3D rP = new Point3D(this.x,
-                        Math.cos (x) * this.y - Math.sin (x) * this.z,
-                        Math.cos (x) * this.z + Math.sin (x) * this.y);
+                        Math.cos (x) * this.y + Math.sin (x) * this.z,
+                        Math.cos (x) * this.z - Math.sin (x) * this.y);
 
         // rotate round y-axis
         rP = new Point3D(Math.cos (y) * rP.x + Math.sin (y) * rP.z,

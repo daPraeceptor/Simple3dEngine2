@@ -50,20 +50,22 @@ public class Object3D {
     }
 
     public boolean inView (Camera camera) {
-        Point3D camCorditates = new Point3D(this.pos);
-        camCorditates.subtract(camera.pos);
-        Point3D camRotated = camCorditates.getRotated(camera.rot);
+        final double  maxObjectSize = 2; // TODO: set this to actual object max distans from center to point most far
 
-        if (camRotated.z < 1)
+        Point3D camCorditates = new Point3D(this.pos).subtract(camera.pos);
+        Point3D camRotated = camCorditates.getRotated(new Point3D(camera.rot).getScaled(-1));
+        double ratioX = (camera.screenWidth + maxObjectSize)/ 2 / camera.screenDistance;
+        double ratioY = (camera.screenHeight + maxObjectSize) / 2 / camera.screenDistance;
+        if (camRotated.z < 0.)
             return false;
-//        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenWidth / 2 )
-//           return false;
-//        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z > camera.screenHeight / 2)
-//            return false;
-//        if ((camRotated.x /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenWidth / 2)
-//            return false;
-//        if ((camRotated.y /* + objectMaxSize */ ) * camera.screenDistance / camRotated.z < camera.screenHeight / 2)
-//            return false;
+        if ((camRotated.x ) / camRotated.z  > ratioX )
+            return false;
+        if ((camRotated.x ) / camRotated.z  < -ratioX )
+            return false;
+        if ((camRotated.y ) / camRotated.z  > ratioY )
+            return false;
+        if ((camRotated.y ) / camRotated.z < -ratioY )
+            return false;
 
         return true;
     }
