@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1238680-1483-4e87-b32c-7ea825974619" name="Changes" comment="Sides, shades and z-ordering fix">
+    <list default="true" id="b1238680-1483-4e87-b32c-7ea825974619" name="Changes" comment="z-ordering used, optimisation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Object3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object3D.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Point3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Point3D.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +94,7 @@
       <workItem from="1710315920530" duration="9781000" />
       <workItem from="1710344244801" duration="1548000" />
       <workItem from="1710512187865" duration="148000" />
-      <workItem from="1710512591918" duration="1116000" />
+      <workItem from="1710512591918" duration="2557000" />
     </task>
     <task id="LOCAL−00001" summary="Rearange">
       <option name="closed" value="true" />
@@ -147,7 +145,14 @@
       <option name="presentableId" value="LOCAL−00007" />
       <updated>1710251455347</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL−00008" summary="z-ordering used, optimisation">
+      <option name="closed" value="true" />
+      <created>1710513816517</created>
+      <option name="number" value="LOCAL−00008" />
+      <option name="presentableId" value="LOCAL−00008" />
+      <updated>1710513816517</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,7 +161,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Rearange" />
     <MESSAGE value="Sides, shades and z-ordering fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sides, shades and z-ordering fix" />
+    <MESSAGE value="z-ordering used, optimisation" />
+    <option name="LAST_COMMIT_MESSAGE" value="z-ordering used, optimisation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

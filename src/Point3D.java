@@ -96,15 +96,16 @@ public class Point3D {
         return this.getRotated (rotation.x, rotation.y, rotation.z);
     }
     public Point3D getRotated (double x, double y, double z) {
-        // rotate round x-axis
-        Point3D rP = new Point3D(this.x,
-                        Math.cos (x) * this.y + Math.sin (x) * this.z,
-                        Math.cos (x) * this.z - Math.sin (x) * this.y);
+// rotate round y-axis
+        Point3D rP = new Point3D(Math.cos (y) * this.x + Math.sin (y) * this.z,
+                this.y,
+                Math.cos (y) * this.z - Math.sin (y) * this.x);
 
-        // rotate round y-axis
-        rP = new Point3D(Math.cos (y) * rP.x + Math.sin (y) * rP.z,
-                rP.y,
-                Math.cos (y) * rP.z - Math.sin (y) * rP.x);
+        // rotate round x-axis
+        rP = new Point3D(rP.x,
+                        Math.cos (x) * rP.y - Math.sin (x) * rP.z,
+                        Math.cos (x) * rP.z + Math.sin (x) * rP.y);
+
 
         // rotate round z-axis
         return new Point3D(Math.cos (z) * rP.x - Math.sin (z) * rP.y,
