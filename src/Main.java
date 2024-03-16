@@ -19,16 +19,19 @@ public class Main {
 
     public static void main(String[] args) {
 
+
         // Create objects
-        for (int i = 0; i < 16; i++) {
-            objects.add(new Object3D(new Point3D(20. * (int) (i / 4), 0, 10 + 20 * (i % 4))));
-            objects.get(i).makeThisRectangle(new Point3D(1, 1, 1));
-            if (i == 0) {
-                objects.get(i).color = new Color(40, 40, 240);
+        for (int i = 0; i < 64; i++) {
+            if (i < 0) { // == 
+                objects.add(new Object3D(new Point3D(0, 1.5, 0)));
+                objects.get(i).makeThisRectangle(new Point3D(20, 1, 20));
+                objects.get(i).color = new Color(20, 220, 30);
                 //objects.get(i).rotadd = new Point3D (0.1, 0.0, 0.0);
             } else {
+                objects.add(new Object3D(new Point3D(20. * (int) (i / 8), 0, 10 + 20 * (i % 8))));
+                objects.get(i).makeThisRectangle(new Point3D(20, 1, 20));
                 objects.get(i).color = new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
-                objects.get(i).rotadd = new Point3D(0.1 * (i % 3), 0.1 * ((i + 1) % 3), 0.1 * ((i + 2) % 3));
+                //objects.get(i).rotadd = new Point3D(0.1 * (i % 3), 0.1 * ((i + 1) % 3), 0.1 * ((i + 2) % 3));
             }
         }
 
@@ -37,12 +40,13 @@ public class Main {
         JPanel panel = new JPanel()
          {
             public void paint(Graphics g) {
-                //((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
+                ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); // DEFAULT
                 // TODO: Background sphere
                 g.setColor(new Color (60, 80, 220));
                 g.fillRect(0, 0, getWidth(), getHeight());
-                g.setColor(new Color(60, 220, 80));
-                g.fillRect(0, (int) ((getHeight() / 2) * camera.rot.x /*+ Math.PI / 2*/) + getHeight() / 2, getWidth(), getHeight());
+
+                //g.setColor(new Color(60, 220, 80));
+                //g.fillRect(0, (int) ((getHeight() / 2) * camera.rot.x /*+ Math.PI / 2*/) + getHeight() / 2, getWidth(), getHeight());
 
 
                 //camera.get
