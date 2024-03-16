@@ -5,6 +5,7 @@ import javax.swing.*;
 
 public class Main {
 
+    private static boolean drawInfoText = true;
     private static final boolean drawObjectPoints = false;
     private static final boolean drawObjectSurfaces = true;
 
@@ -19,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Create objects
-        for (int i = 0; i < 64; i++) {
+        for (int i = 0; i < 16; i++) {
             objects.add(new Object3D(new Point3D(20. * (int) (i / 4), 0, 10 + 20 * (i % 4))));
             objects.get(i).makeThisRectangle(new Point3D(1, 1, 1));
             if (i == 0) {
@@ -27,18 +28,21 @@ public class Main {
                 //objects.get(i).rotadd = new Point3D (0.1, 0.0, 0.0);
             } else {
                 objects.get(i).color = new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
-                //objects.get(i).rotadd = new Point3D(0.1 * (i % 3), 0.1 * ((i + 1) % 3), 0.1 * ((i + 2) % 3));
+                objects.get(i).rotadd = new Point3D(0.1 * (i % 3), 0.1 * ((i + 1) % 3), 0.1 * ((i + 2) % 3));
             }
         }
 
 
-        JFrame f = new JFrame("Simple 3D Engine Demo") {
+        JFrame f = new JFrame("Simple 3D Engine Demo");
+        JPanel panel = new JPanel()
+         {
             public void paint(Graphics g) {
-                super.paint(g);
-                ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
+                //((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
                 // TODO: Background sphere
+                g.setColor(new Color (60, 80, 220));
+                g.fillRect(0, 0, getWidth(), getHeight());
                 g.setColor(new Color(60, 220, 80));
-                g.fillRect(0, (int) (-(getHeight() / 2) * camera.rot.x /*+ Math.PI / 2*/) + getHeight() / 2, getWidth(), getHeight());
+                g.fillRect(0, (int) ((getHeight() / 2) * camera.rot.x /*+ Math.PI / 2*/) + getHeight() / 2, getWidth(), getHeight());
 
 
                 //camera.get
@@ -88,18 +92,22 @@ public class Main {
                         g.setColor(polygon.color);
                         g.fillPolygon(polygon);
                     }
-
+                }
+                if (drawInfoText) {
+                    g.setColor(Color.WHITE);
+                    int i = 2;
+                    g.drawString("Objects: " + objects.size() + ", Polygons: " + polygons.size(), 20, 20 * i++);
+                    g.drawString("XYZ " + camera.pos.toString() + " Rot " + camera.rot.toString(), 20, 20 * i++);
                 }
             }
         };
-        JPanel panel = new JPanel();
+        f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         panel.setPreferredSize(new Dimension(800, 600));
-        panel.setBackground(new Color(120, 160, 220)); // Sky color
+        panel.setBackground(null); // Sky color
         f.add(panel);
         f.pack();
         f.setLayout(null);
         camera = new Camera(new Point3D(0, 0, 0), 200, f.getWidth(), f.getHeight());
-        f.setVisible(true);
         f.addMouseMotionListener(new MouseMotionListener() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -113,6 +121,10 @@ public class Main {
 
                 camera.rot.y += (double) deltaX * 2. / f.getWidth();
                 camera.rot.x += (double) deltaY * 2. / f.getHeight();
+                if (camera.rot.x > camera.maxRot.x) 
+                    camera.rot.x = camera.maxRot.x;
+                else if (camera.rot.x < camera.minRot.x) 
+                    camera.rot.x = camera.minRot.x;
 
                 Robot r;
                 try {
@@ -149,16 +161,18 @@ public class Main {
                         break;
 
                     case KeyEvent.VK_W:
-                        camera.dir.setTo(new Point3D(0, 0, 1).getRotated(camera.rot.x, camera.rot.y, camera.rot.z));
+                        camera.dir.setTo(new Point3D(0, 0, 1).getRotated(0, camera.rot.y, 0));
+                        camera.dir.add (new Point3D(0, -1, 0).getRotated(camera.rot.x, 0, 0));
                         break;
                     case KeyEvent.VK_S:
-                        camera.dir.setTo(new Point3D(0, 0, -1).getRotated(camera.rot.x, camera.rot.y, camera.rot.z));
+                        camera.dir.setTo(new Point3D(0, 0, -1).getRotated(0, camera.rot.y, 0));
+                        camera.dir.add (new Point3D(0, 1, 0).getRotated(camera.rot.x, 0, 0));
                         break;
                     case KeyEvent.VK_A:
-                        camera.dir.setTo(new Point3D(-1, 0, 0).getRotated(camera.rot.x, camera.rot.y, camera.rot.z));
+                        camera.dir.setTo(new Point3D(-1, 0, 0).getRotated(0, camera.rot.y, 0));
                         break;
                     case KeyEvent.VK_D:
-                        camera.dir.setTo(new Point3D(1, 0, 0).getRotated(camera.rot.x, camera.rot.y, camera.rot.z));
+                        camera.dir.setTo(new Point3D(1, 0, 0).getRotated(0, camera.rot.y, 0));
                         break;
 
                 }
@@ -184,7 +198,7 @@ public class Main {
             }
         });
 
-        Timer timer = new Timer(20, (ActionEvent e) -> {
+        Timer timer = new Timer(80, (ActionEvent e) -> {
             // Apply movement
             camera.move();
             for (Object3D o : objects) {
@@ -200,7 +214,7 @@ public class Main {
             }
             // Create surfaces
             if (drawObjectSurfaces) {
-                polygons.clear();
+                    polygons.clear();
                 for (Object3D o : objectsToView) {
                     // Rotate points in object space
                     o.rotatedPointList.clear();
@@ -271,10 +285,12 @@ public class Main {
                 polygons.sort((ProjectedPolygon p1, ProjectedPolygon p2) -> (int) ((p2.z - p1.z) * 100));
             } // if (drawSurfaces)
             // Paint surfaces
-            f.repaint();
+            panel.repaint ();
+            //System.out.println("Paint called");
 
         });
         timer.start();
+        f.setVisible(true);
 
     }
 }

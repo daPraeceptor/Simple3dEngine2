@@ -2,6 +2,9 @@ public class Camera extends Object3D {
     public double screenDistance = 400;
     public int screenWidth = 0; // in pixels
     public int screenHeight = 0;
+
+    public Point3D maxRot = new Point3D(1.1, 0, 0);
+    public Point3D minRot = new Point3D(-1.1, 0, 0);
     Camera (Point3D p, double screenDistance, int screenWidth, int screenHeight) {
         super (p);
         this.screenDistance = screenDistance;
