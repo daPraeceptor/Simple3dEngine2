@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b1238680-1483-4e87-b32c-7ea825974619" name="Changes" comment="z-ordering used, optimisation">
+    <list default="true" id="b1238680-1483-4e87-b32c-7ea825974619" name="Changes" comment="3D rotations updated">
+      <change afterPath="$PROJECT_DIR$/src/LwjglTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Point3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Point3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Simple3dEngine.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Simple3dEngine.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Object3D.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Object3D.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,24 +41,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.LwjgTest.executor": "Run",
+    "Application.LwjglTest.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.lwjgTest.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/PETHOL/OneDrive - Härryda Kommun/Dokument/Programmering/lwjgl",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RunManager" selected="Application.lwjgTest">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="Simple3dEngine" />
@@ -63,6 +70,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="lwjgTest" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="LwjglTest" />
+      <module name="Simple3dEngine" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.lwjgTest" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -94,7 +112,15 @@
       <workItem from="1710315920530" duration="9781000" />
       <workItem from="1710344244801" duration="1548000" />
       <workItem from="1710512187865" duration="148000" />
-      <workItem from="1710512591918" duration="2557000" />
+      <workItem from="1710512591918" duration="2623000" />
+      <workItem from="1710837506355" duration="4353000" />
+      <workItem from="1710928200595" duration="1049000" />
+      <workItem from="1710934834281" duration="4383000" />
+      <workItem from="1710947181620" duration="366000" />
+      <workItem from="1711036776341" duration="2847000" />
+      <workItem from="1712749050353" duration="3633000" />
+      <workItem from="1712833756711" duration="675000" />
+      <workItem from="1713861679981" duration="1770000" />
     </task>
     <task id="LOCAL−00001" summary="Rearange">
       <option name="closed" value="true" />
@@ -152,7 +178,14 @@
       <option name="presentableId" value="LOCAL−00008" />
       <updated>1710513816517</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL−00009" summary="3D rotations updated">
+      <option name="closed" value="true" />
+      <created>1710515205049</created>
+      <option name="number" value="LOCAL−00009" />
+      <option name="presentableId" value="LOCAL−00009" />
+      <updated>1710515205049</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,19 +195,15 @@
     <MESSAGE value="Rearange" />
     <MESSAGE value="Sides, shades and z-ordering fix" />
     <MESSAGE value="z-ordering used, optimisation" />
-    <option name="LAST_COMMIT_MESSAGE" value="z-ordering used, optimisation" />
+    <MESSAGE value="3D rotations updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="3D rotations updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>264</line>
+          <line>273</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>

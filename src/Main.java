@@ -10,6 +10,8 @@ public class Main {
     private static final boolean drawObjectSurfaces = true;
 
     public static ArrayList<Object3D> objects = new ArrayList<>();
+    public static ArrayList<Object3D> objectsToView = new ArrayList<>();
+
     public static ArrayList<ProjectedPolygon> polygons = new ArrayList<>();
     public static Camera camera = null;
 
@@ -21,17 +23,17 @@ public class Main {
 
 
         // Create objects
-        for (int i = 0; i < 64; i++) {
-            if (i < 0) { // == 
-                objects.add(new Object3D(new Point3D(0, 1.5, 0)));
-                objects.get(i).makeThisRectangle(new Point3D(20, 1, 20));
+        for (int i = 0; i < 128; i++) {
+            if (i == 0) { // ==
+                objects.add(new Object3D(new Point3D(0, 0, 10)));
+                objects.get(i).makeThisRectangle(new Point3D(10, 1, 10));
                 objects.get(i).color = new Color(20, 220, 30);
-                //objects.get(i).rotadd = new Point3D (0.1, 0.0, 0.0);
+                objects.get(i).rotadd = new Point3D (0.03, 0.0, 0.0);
             } else {
                 objects.add(new Object3D(new Point3D(20. * (int) (i / 8), 0, 10 + 20 * (i % 8))));
-                objects.get(i).makeThisRectangle(new Point3D(20, 1, 20));
+                objects.get(i).makeThisRectangle(new Point3D(10, 1, 10));
                 objects.get(i).color = new Color((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
-                //objects.get(i).rotadd = new Point3D(0.1 * (i % 3), 0.1 * ((i + 1) % 3), 0.1 * ((i + 2) % 3));
+                objects.get(i).rotadd = new Point3D(0.03 * (i % 3), 0.01 * ((i + 1) % 3), 0.01 * ((i + 2) % 3));
             }
         }
 
@@ -51,27 +53,13 @@ public class Main {
 
                 //camera.get
                 if (drawObjectPoints) {
-                    for (Object3D o : objects) {
-                        Point3D op = o.pos.subtract(camera.pos);
-
-                        // subtract camera placement and rotation
-                        op = op.getRotated(camera.rot);
-
-                        if (op.z < 0) {
-                            continue;
-                        }
-
-                        o.rotatedPointList.clear();
-                        for (Point3D p : o.pointList) {
-                            Point3D rotated_cam = new Point3D(1, 1, 1).getRotated(camera.rot.x, camera.rot.y, camera.rot.z);
-                            Point3D newPoint = p.getRotated(o.rot.x + rotated_cam.x, o.rot.y + rotated_cam.y, o.rot.z + rotated_cam.z);
-                            newPoint.add(op);
-                            o.rotatedPointList.add(newPoint);
-                        }
+                    for (Object3D o : objectsToView) {
                         for (Point3D p : o.rotatedPointList) {
                             int size = (int) (1 * camera.screenDistance / (p.z));
-                            int xx = (int) ((p.x) * camera.screenDistance / (p.z)) - size / 2 + getWidth() / 2;
-                            int yy = (int) ((p.y) * camera.screenDistance / (p.z)) - size / 2 + getHeight() / 2;
+                            //int xx = (int) ((p.x) * camera.screenDistance / (p.z)) - size / 2 + getWidth() / 2;
+                            //int yy = (int) ((p.y) * camera.screenDistance / (p.z)) - size / 2 + getHeight() / 2;
+                            int xx = (int) ((p.x * camera.screenDistance) / (p.z)) + camera.screenWidth / 2 - size / 2;
+                            int yy = (int) ((p.y * camera.screenDistance) / (p.z)) + camera.screenHeight / 2 - size / 2;
 
                             //System.out.println ("Point " + i++ + ": " + p + " -> " + xx + ", " + yy);
 
@@ -210,7 +198,7 @@ public class Main {
             }
 
             // Determine objects to draw
-            ArrayList<Object3D> objectsToView = new ArrayList<>();
+            objectsToView.clear ();
             for (Object3D o : objects) {
                 if (o.inView(camera)) {
                     objectsToView.add(o);
@@ -218,7 +206,10 @@ public class Main {
             }
             // Create surfaces
             if (drawObjectSurfaces) {
-                    polygons.clear();
+                // Light in cam-space
+                Point3D camLight = new Point3D(light.pos).subtract(camera.pos);
+                camLight = camLight.getRotated(new Point3D(camera.rot).getScaled(-1));
+                polygons.clear();
                 for (Object3D o : objectsToView) {
                     // Rotate points in object space
                     o.rotatedPointList.clear();
@@ -255,7 +246,7 @@ public class Main {
                         //System.out.println("Angle = " + angle + " |cross| = " + crossProduct.length());
 
                         // Light angle
-                        double dotProdLight = crossProduct.dotProduct(light.pos);
+                        double dotProdLight = crossProduct.dotProduct(camLight);
                         double light_angle = Math.asin(dotProdLight / (light.pos.length() * crossProduct.length()));
                         double lumination = light_angle / (Math.PI) + 0.5;
 
@@ -279,7 +270,7 @@ public class Main {
                             // z sort value
                             polygon.z = avrage_z / s.nrOfPoints();
                             //
-                            if (polygon.z <= 0)
+                            if (polygon.z <= 0.4)
                                 continue;
                             polygons.add(polygon);
                         }

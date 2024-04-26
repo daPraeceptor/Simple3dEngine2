@@ -48,6 +48,31 @@ public class Object3D {
         surfaces.add (new Surface(new int[] {2, 3, 7, 6})); // Bottom
         surfaces.add (new Surface(new int[] {0, 2, 6, 4})); // left
     }
+    public void makeThisTetrahedron (Point3D size) {
+        pointList.add(new Point3D(0  * size.x,
+                                    size.y,
+                                    0 * size.z));
+        pointList.add(new Point3D(
+                Math.cos (Math.PI * 2 / 3) * size.x,
+                Math.cos (Math.PI * 2 / 3) * size.y,
+                Math.cos (Math.PI * 2 / 3) * size.z
+        ));
+        pointList.add(new Point3D(
+                Math.cos (Math.PI * 2 / 3) * -size.x,
+                Math.cos (Math.PI * 2 / 3) * size.y,
+                Math.cos (Math.PI * 2 / 3) * size.z
+        ));
+        pointList.add(new Point3D(
+                0  * size.x,
+                Math.cos (Math.PI * 2 / 3) * size.y,
+                Math.cos (Math.PI * 2 / 3) * -size.z
+        ));
+
+        surfaces.add (new Surface(new int[] {0, 2, 1})); // Frontside
+        surfaces.add (new Surface(new int[] {0, 3, 2})); // Top
+        surfaces.add (new Surface(new int[] {0, 1, 3})); // right
+        surfaces.add (new Surface(new int[] {1, 2, 3})); // Backside
+    }
 
     public boolean inView (Camera camera) {
         final double  maxObjectSize = 2; // TODO: set this to actual object max distans from center to point most far
